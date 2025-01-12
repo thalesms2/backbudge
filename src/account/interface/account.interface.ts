@@ -1,9 +1,9 @@
 import { IsString, IsDecimal, IsNotEmptyObject } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { InterfaceFactory } from 'services/factory/interface.factory';
-import { ITransaction } from 'src/transaction/interface/transaction.interface';
-import { ISchedule } from 'src/schedule/interface/schedule.interface';
-import { ICard } from 'src/card/interface/card.interface';
+import { InterfaceFactory } from '../../../services/factory/interface.factory';
+import { ITransaction } from '../../transaction/interface/transaction.interface';
+import { ISchedule } from '../../schedule/interface/schedule.interface';
+import { ICard } from '../../card/interface/card.interface';
 
 export class IAccount extends InterfaceFactory {
   @IsString()

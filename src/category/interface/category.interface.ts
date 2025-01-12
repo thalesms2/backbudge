@@ -1,9 +1,9 @@
 import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ISubcategory } from 'src/subcategory/interface/subcategory.interface';
-import { ITransaction } from 'src/transaction/interface/transaction.interface';
-import { ISchedule } from 'src/schedule/interface/schedule.interface';
-import { InterfaceFactory } from 'services/factory/interface.factory';
+import { ISubcategory } from '../../subcategory/interface/subcategory.interface';
+import { ITransaction } from '../../transaction/interface/transaction.interface';
+import { ISchedule } from '../../schedule/interface/schedule.interface';
+import { InterfaceFactory } from '../../../services/factory/interface.factory';
 
 export class ICategory extends InterfaceFactory {
   @IsString()

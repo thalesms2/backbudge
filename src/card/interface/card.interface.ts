@@ -1,9 +1,9 @@
 import { IsDate, IsDecimal, IsInt, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ITransaction } from 'src/transaction/interface/transaction.interface';
-import { IAccount } from 'src/account/interface/account.interface';
-import { ISchedule } from 'src/schedule/interface/schedule.interface';
-import { InterfaceFactory } from 'services/factory/interface.factory';
+import { ITransaction } from '../../transaction/interface/transaction.interface';
+import { IAccount } from '../../account/interface/account.interface';
+import { ISchedule } from '../../schedule/interface/schedule.interface';
+import { InterfaceFactory } from '../../../services/factory/interface.factory';
 
 export class ICard extends InterfaceFactory {
   @IsString()

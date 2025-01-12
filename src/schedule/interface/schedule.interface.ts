@@ -1,11 +1,11 @@
 import { IsString, IsDecimal, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { InterfaceFactory } from 'services/factory/interface.factory';
+import { InterfaceFactory } from '../../../services/factory/interface.factory';
 import { TransactionType, TransactionStatus, Recurrence } from '@prisma/client';
-import { IAccount } from 'src/account/interface/account.interface';
-import { ICard } from 'src/card/interface/card.interface';
-import { ICategory } from 'src/category/interface/category.interface';
-import { ISubcategory } from 'src/subcategory/interface/subcategory.interface';
+import { IAccount } from '../../account/interface/account.interface';
+import { ICard } from '../../card/interface/card.interface';
+import { ICategory } from '../../category/interface/category.interface';
+import { ISubcategory } from '../../subcategory/interface/subcategory.interface';
 
 export class ISchedule extends InterfaceFactory {
   @IsDecimal()

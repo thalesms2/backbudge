@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceFactory } from 'services/factory/service.factory';
-import { PrismaService } from 'services/prisma/prisma.service';
+import { ServiceFactory } from '../../services/factory/service.factory';
+import { PrismaService } from '../../services/prisma/prisma.service';
 import { ILog } from './interface/log.interface';
 import { Action, Module } from '@prisma/client';
 

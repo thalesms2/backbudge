@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { ControllerFactory } from 'services/factory/controller.factory';
+import { ControllerFactory } from '../../services/factory/controller.factory';
 import { LogService } from './log.service';
 import { ILog } from './interface/log.interface';
 import { LogDto } from './interface/log.dto';

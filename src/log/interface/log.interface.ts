@@ -1,6 +1,6 @@
 import { IsDate, IsInt, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IUser } from 'src/user/interface/user.interface';
+import { IUser } from '../../user/interface/user.interface';
 import { Action } from '@prisma/client';
 
 export class ILog {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../services/prisma/prisma.service';
-import { ServiceFactory } from 'services/factory/service.factory';
+import { ServiceFactory } from '../../services/factory/service.factory';
 import { IUser } from './interface/user.interface';
 import { Role } from '@prisma/client';
 
