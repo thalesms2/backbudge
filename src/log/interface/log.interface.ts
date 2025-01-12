@@ -14,7 +14,7 @@ export class ILog {
   message: string;
   @IsInt()
   userId: number;
-  user: IUser;
+  user?: IUser;
   action: Action;
   @IsDate()
   createdAt: Date;

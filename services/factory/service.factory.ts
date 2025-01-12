@@ -16,6 +16,15 @@ export class ServiceFactory<T> {
     });
   }
 
+  async updatePerId(id: number, data): Promise<T> {
+    return await this.prismaService[this.db].update({
+      where: {
+        id: id,
+      },
+      data: data,
+    });
+  }
+
   async findPerId(id: number): Promise<T> {
     return await this.prismaService[this.db].findUnique({
       where: {

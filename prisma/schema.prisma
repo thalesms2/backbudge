@@ -8,16 +8,16 @@ datasource db {
 }
 
 model User {
-  username     String        @unique
-  password     String
-  role         Role
-  logs         Log[]
-  accounts     Account[]
-  cards        Card[]
-  transactions Transaction[]
-  categories   Category[]
+  username      String        @unique
+  password      String
+  role          Role
+  logs          Log[]
+  accounts      Account[]
+  cards         Card[]
+  transactions  Transaction[]
+  categories    Category[]
   subcategories Subcategory[]
-  schedulings  Schedule[]
+  schedulings   Schedule[]
 
   id        Int       @id @unique @default(autoincrement())
   createdAt DateTime  @default(now())
@@ -61,21 +61,20 @@ model Card {
 }
 
 model Transaction {
-  amount      Float
-  type        TransactionType
-  status      TransactionStatus
-  accountId   Int?
-  Account     Account?          @relation(fields: [accountId], references: [id])
-  cardId      Int?
-  Card        Card?             @relation(fields: [cardId], references: [id])
-  duoDate     DateTime?
-  title       String
-  description String?
-  categoryId  Int?
-  Category    Category?         @relation(fields: [categoryId], references: [id])
+  amount        Float
+  type          TransactionType
+  status        TransactionStatus
+  accountId     Int?
+  Account       Account?          @relation(fields: [accountId], references: [id])
+  cardId        Int?
+  Card          Card?             @relation(fields: [cardId], references: [id])
+  duoDate       DateTime?
+  title         String
+  description   String?
+  categoryId    Int?
+  Category      Category?         @relation(fields: [categoryId], references: [id])
   subcategoryId Int?
-  Subcategory Subcategory?      @relation(fields: [subcategoryId], references: [id])
-  
+  Subcategory   Subcategory?      @relation(fields: [subcategoryId], references: [id])
 
   id        Int       @id @unique @default(autoincrement())
   userId    Int
@@ -87,11 +86,11 @@ model Transaction {
 }
 
 model Category {
-  name String
-  description String
+  name          String
+  description   String
   subcategories Subcategory[]
-  transactions Transaction[]
-  schedulings  Schedule[]
+  transactions  Transaction[]
+  schedulings   Schedule[]
 
   id        Int       @id @unique @default(autoincrement())
   userId    Int
@@ -103,10 +102,10 @@ model Category {
 }
 
 model Subcategory {
-  name String
-  description String
-  categoryId Int
-  category Category @relation(fields: [categoryId], references: [id])
+  name         String
+  description  String
+  categoryId   Int
+  category     Category      @relation(fields: [categoryId], references: [id])
   transactions Transaction[]
   schedulings  Schedule[]
 
@@ -120,24 +119,24 @@ model Subcategory {
 }
 
 model Schedule {
-  amount      Float
-  type        TransactionType
-  status      TransactionStatus
-  accountId   Int?
-  Account     Account?          @relation(fields: [accountId], references: [id])
-  cardId      Int?
-  Card        Card?             @relation(fields: [cardId], references: [id])
-  duoDate     DateTime?
-  title       String
-  description String?
-  categoryId  Int?
-  Category    Category?         @relation(fields: [categoryId], references: [id])
+  amount        Float
+  type          TransactionType
+  status        TransactionStatus
+  accountId     Int?
+  Account       Account?          @relation(fields: [accountId], references: [id])
+  cardId        Int?
+  Card          Card?             @relation(fields: [cardId], references: [id])
+  duoDate       DateTime?
+  title         String
+  description   String?
+  categoryId    Int?
+  Category      Category?         @relation(fields: [categoryId], references: [id])
   subcategoryId Int?
-  Subcategory Subcategory?      @relation(fields: [subcategoryId], references: [id])
-  startDate   DateTime?
-  endDate     DateTime?
-  recurrence  Recurrence?
-  infinity   Boolean
+  Subcategory   Subcategory?      @relation(fields: [subcategoryId], references: [id])
+  startDate     DateTime?
+  endDate       DateTime?
+  recurrence    Recurrence?
+  infinity      Boolean
 
   id        Int       @id @unique @default(autoincrement())
   userId    Int
@@ -153,6 +152,7 @@ model Log {
   userId  Int
   user    User   @relation(fields: [userId], references: [id])
   action  Action
+  module  Module
 
   id        Int      @id @unique @default(autoincrement())
   createdAt DateTime @default(now())
@@ -177,6 +177,7 @@ enum TransactionStatus {
 }
 
 enum Action {
+  CONSULT
   LOGIN
   LOGOUT
   CREATE
@@ -189,4 +190,16 @@ enum Recurrence {
   WEEKLY
   MONTHLY
   YEARLY
+}
+
+enum Module {
+  ACCOUNT
+  AUTH
+  CARD
+  CATEGORY
+  LOG
+  SCHEDULE
+  SUBCATEGORY
+  TRANSACTION
+  USER
 }

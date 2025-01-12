@@ -7,6 +7,7 @@ import {
   UseGuards,
   Body,
   Post,
+  Put,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 
@@ -40,6 +41,18 @@ export class ControllerFactory<T, TDto> {
       throw new HttpException({}, HttpStatus.NO_CONTENT);
     } catch (error) {
       console.error(error);
+      throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  async updatePerId(@Param('id') id: string, @Body() data: TDto): Promise<T> {
+    try {
+      const result = await this.service.updatePerId(id, data);
+      if (result) return result;
+      throw new HttpException({}, HttpStatus.NO_CONTENT);
+    } catch (error) {
       throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
     }
   }
