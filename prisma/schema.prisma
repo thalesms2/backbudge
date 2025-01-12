@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username     String        @unique
+  password     String
+  role         Role
+  logs         Log[]
+  accounts     Account[]
+  cards        Card[]
+  transactions Transaction[]
+  categories   Category[]
+  subcategories Subcategory[]
+  schedulings  Schedule[]
+
+  id        Int       @id @unique @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Account {
+  name         String
+  balance      Float
+  transactions Transaction[]
+  cards        Card[]
+  schedulings  Schedule[]
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Card {
+  name         String
+  expDate      DateTime
+  limit        Float
+  transactions Transaction[]
+  accountId    Int
+  account      Account       @relation(fields: [accountId], references: [id])
+  schedulings  Schedule[]
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Transaction {
+  amount      Float
+  type        TransactionType
+  status      TransactionStatus
+  accountId   Int?
+  Account     Account?          @relation(fields: [accountId], references: [id])
+  cardId      Int?
+  Card        Card?             @relation(fields: [cardId], references: [id])
+  duoDate     DateTime?
+  title       String
+  description String?
+  categoryId  Int?
+  Category    Category?         @relation(fields: [categoryId], references: [id])
+  subcategoryId Int?
+  Subcategory Subcategory?      @relation(fields: [subcategoryId], references: [id])
+  
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Category {
+  name String
+  description String
+  subcategories Subcategory[]
+  transactions Transaction[]
+  schedulings  Schedule[]
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Subcategory {
+  name String
+  description String
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  transactions Transaction[]
+  schedulings  Schedule[]
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Schedule {
+  amount      Float
+  type        TransactionType
+  status      TransactionStatus
+  accountId   Int?
+  Account     Account?          @relation(fields: [accountId], references: [id])
+  cardId      Int?
+  Card        Card?             @relation(fields: [cardId], references: [id])
+  duoDate     DateTime?
+  title       String
+  description String?
+  categoryId  Int?
+  Category    Category?         @relation(fields: [categoryId], references: [id])
+  subcategoryId Int?
+  Subcategory Subcategory?      @relation(fields: [subcategoryId], references: [id])
+  startDate   DateTime?
+  endDate     DateTime?
+  recurrence  Recurrence?
+  infinity   Boolean
+
+  id        Int       @id @unique @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deleted   Boolean   @default(false)
+}
+
+model Log {
+  message String
+  userId  Int
+  user    User   @relation(fields: [userId], references: [id])
+  action  Action
+
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+  CLIENT
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+  TRANSFER
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  CANCELED
+}
+
+enum Action {
+  LOGIN
+  LOGOUT
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum Recurrence {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
