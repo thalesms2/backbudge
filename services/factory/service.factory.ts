@@ -1,4 +1,4 @@
-import { PrismaService } from 'services/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 export class ServiceFactory<T> {
   constructor(

@@ -9,7 +9,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
+import { JwtAuthGuard } from '../../src/auth/guard/jwt-auth.guard';
 
 export class ControllerFactory<T, TDto> {
   constructor(readonly service: any) {}
