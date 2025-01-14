@@ -1,71 +1,36 @@
-import {
-  Get,
-  Param,
-  Delete,
-  HttpException,
-  HttpStatus,
-  UseGuards,
-  Body,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Get, Param, Delete, UseGuards, Body, Post, Put } from '@nestjs/common';
 import { JwtAuthGuard } from '../../src/auth/guard/jwt-auth.guard';
 
-export class ControllerFactory<T, TDto> {
+export class ControllerFactory<TDto> {
   constructor(readonly service: any) {}
 
   @UseGuards(JwtAuthGuard)
   @Get('list-all')
-  async listAll(): Promise<Array<T>> {
+  async listAll() {
     return await this.service.listAll();
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findPerId(@Param('id') id: string): Promise<T> {
-    try {
-      const result = await this.service.findPerId(id);
-      if (result) return result;
-      throw new HttpException({}, HttpStatus.NO_CONTENT);
-    } catch (error) {
-      throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
-    }
+  async findPerId(@Param('id') id: string) {
+    return await this.service.findPerId(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() data: TDto): Promise<T> {
-    try {
-      const result = await this.service.create(data);
-      if (result) return result;
-      throw new HttpException({}, HttpStatus.NO_CONTENT);
-    } catch (error) {
-      console.error(error);
-      throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
-    }
+  async create(@Body() data: TDto) {
+    return await this.service.create(data);
   }
 
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async updatePerId(@Param('id') id: string, @Body() data: TDto): Promise<T> {
-    try {
-      const result = await this.service.updatePerId(id, data);
-      if (result) return result;
-      throw new HttpException({}, HttpStatus.NO_CONTENT);
-    } catch (error) {
-      throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
-    }
+  async updatePerId(@Param('id') id: string, @Body() data: TDto) {
+    return await this.service.updatePerId(id, data);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async deletePerId(@Param('id') id: string): Promise<T> {
-    try {
-      const result = await this.service.deletePerId(id);
-      if (result) return result;
-      throw new HttpException({}, HttpStatus.NO_CONTENT);
-    } catch (error) {
-      throw new HttpException({ error: error }, HttpStatus.BAD_REQUEST);
-    }
+  async deletePerId(@Param('id') id: string) {
+    return await this.service.deletePerId(id);
   }
 }

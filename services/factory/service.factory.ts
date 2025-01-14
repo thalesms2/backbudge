@@ -1,22 +1,22 @@
 import { PrismaService } from '../prisma/prisma.service';
 
-export class ServiceFactory<T> {
+export class ServiceFactory {
   constructor(
     readonly prismaService: PrismaService,
     private readonly db: string,
   ) {}
 
-  async listAll(): Promise<Array<T>> {
+  async listAll() {
     return await this.prismaService[this.db].findMany();
   }
 
-  async create(data): Promise<T> {
+  async create(data) {
     return await this.prismaService[this.db].create({
       data: data,
     });
   }
 
-  async updatePerId(id: number, data): Promise<T> {
+  async updatePerId(id: number, data) {
     return await this.prismaService[this.db].update({
       where: {
         id: id,
@@ -25,7 +25,7 @@ export class ServiceFactory<T> {
     });
   }
 
-  async findPerId(id: number): Promise<T> {
+  async findPerId(id: number) {
     return await this.prismaService[this.db].findUnique({
       where: {
         id: id,
@@ -33,7 +33,7 @@ export class ServiceFactory<T> {
     });
   }
 
-  async deletePerId(id: number): Promise<T> {
+  async deletePerId(id: number) {
     return await this.prismaService[this.db].delete({
       where: {
         id: id,

@@ -1,17 +1,11 @@
 import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
-import {
-  ApiBasicAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInReturnDto } from './interface/signInReturn.dto';
 import { SignInDto } from './interface/signIn.dto';
 import { SignUpDto } from './interface/signUp.dto';
 import { SignUpReturnDto } from './interface/signUpReturn.dto';
 
-@ApiBasicAuth('apiKey')
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {

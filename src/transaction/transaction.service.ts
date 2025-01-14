@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ServiceFactory } from '../../services/factory/service.factory';
 import { PrismaService } from '../../services/prisma/prisma.service';
-import { ITransaction } from './interface/transaction.interface';
 
 @Injectable()
-export class TransactionService extends ServiceFactory<ITransaction> {
+export class TransactionService extends ServiceFactory {
   constructor(readonly prismaService: PrismaService) {
     super(prismaService, 'Transaction');
+  }
+  async totals() {
+    this.prismaService.transaction.groupBy({
+      by: ['status'],
+      _sum: {
+        amount: true,
+      },
+    });
   }
 }

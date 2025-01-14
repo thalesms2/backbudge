@@ -1,4 +1,4 @@
-import { IsString, IsDecimal, IsNotEmptyObject } from 'class-validator';
+import { IsString, IsDecimal } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { InterfaceFactory } from '../../../services/factory/interface.factory';
 import { ITransaction } from '../../transaction/interface/transaction.interface';
@@ -18,10 +18,7 @@ export class IAccount extends InterfaceFactory {
     description: 'The balance of the account',
   })
   balance: number;
-  @IsNotEmptyObject()
-  transactions: ITransaction[] | null;
-  @IsNotEmptyObject()
-  cards: ICard[] | null;
-  @IsNotEmptyObject()
-  schedulings: ISchedule[] | null;
+  transactions?: ITransaction[];
+  cards?: ICard[];
+  schedulings?: ISchedule[];
 }

@@ -22,7 +22,7 @@ export class InterfaceFactory {
   })
   userId: number;
   @IsNotEmptyObject()
-  user: IUser;
+  user?: IUser;
   @IsDate()
   @ApiProperty({
     example: new Date(),
